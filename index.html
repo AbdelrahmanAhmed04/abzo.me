@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>عبظو الثري العربي</title>
+    <script src="https://www.youtube.com/player_api"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f1f1f1;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      #playButton {
+        font-size: 24px;
+        padding: 16px 32px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #playButton:hover {
+        background-color: #3e8e41;
+      }
+
+      #videoPlayer {
+        display: none;
+      }
+
+      #exitMessage {
+        display: none;
+        font-size: 80px;
+        font-weight: 600;
+        color: red;
+        margin-top: 32px;
+      }
+
+      video {
+        width: 100%;
+        height: auto;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button id="playButton">CLICK HERE</button>
+      <div id="videoPlayer">
+        <video id="myVideo" controls>
+          <source src="video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div id="exitMessage" dir="rtl">طيزك حمرا🤪</div>
+    </div>
+    <script>
+      document
+        .getElementById("playButton")
+        .addEventListener("click", function () {
+          var videoPlayer = document.getElementById("videoPlayer");
+          videoPlayer.style.display = "block";
+          var myVideo = document.getElementById("myVideo");
+          myVideo.play();
+          myVideo.requestFullscreen(); // Request fullscreen mode for the video element
+          document.getElementById("playButton").style.display = "none";
+        });
+
+      document.addEventListener("fullscreenchange", function () {
+        var myVideo = document.getElementById("myVideo");
+        var exitMessage = document.getElementById("exitMessage");
+        if (!document.fullscreenElement) {
+          // Video exited fullscreen mode
+          myVideo.pause();
+          myVideo.currentTime = 0;
+          videoPlayer.style.display = "none";
+          exitMessage.style.display = "block";
+        } else {
+          // Video entered fullscreen mode
+          exitMessage.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
